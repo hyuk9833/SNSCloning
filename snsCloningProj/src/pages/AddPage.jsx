@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import myStyle from '../styles/myStyle';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import api from '../apis/api';
+import {addFeedApi} from '../apis/feed';
 
 const AddPage = ({navigation}) => {
   const [content, setContent] = useState('');
@@ -26,7 +27,12 @@ const AddPage = ({navigation}) => {
 
   useEffect(() => {
     FetchImages();
-  });
+  }, []);
+
+  const feedConfirm = () => {
+    addFeedApi({feedRequest: {content: content, tags: ''}, image: images});
+    navigation.goBack();
+  };
 
   const filterSelected = (selectItem, selectIndex) => {
     // 클릭한 이미지가 선택되지 않았을때
@@ -94,7 +100,7 @@ const AddPage = ({navigation}) => {
           <Icon name="close" size={24} />
         </TouchableOpacity>
         <Text style={myStyle.headerTitle}>게시물 추가</Text>
-        <TouchableOpacity onPress={async () => await api()}>
+        <TouchableOpacity onPress={() => feedConfirm()}>
           <Text style={{color: '#4169e1'}}>완료</Text>
         </TouchableOpacity>
       </View>

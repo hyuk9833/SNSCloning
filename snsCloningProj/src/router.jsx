@@ -1,4 +1,3 @@
-import {Image} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -8,17 +7,20 @@ import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
 import AddPage from './pages/AddPage';
 import MyPage from './pages/MyPage';
+import DirectMessagePage from './pages/DirectMessagePage';
 
 const Stack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
+const HomeStack = createNativeStackNavigator();
+
 const MainTab = () => {
   return (
     <Tab.Navigator screenOptions={{headerShown: false}}>
       <Tab.Screen
-        name="Home"
-        component={HomePage}
+        name="HomeTab"
+        component={Home}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
@@ -27,7 +29,7 @@ const MainTab = () => {
         }}
       />
       <Tab.Screen
-        name="Search"
+        name="SearchTab"
         component={SearchPage}
         options={{
           tabBarLabel: 'Search',
@@ -37,17 +39,7 @@ const MainTab = () => {
         }}
       />
       <Tab.Screen
-        name="Add"
-        component={AddPage}
-        options={{
-          tabBarLabel: 'Add',
-          tabBarIcon: ({color, size}) => (
-            <Icon name="plus-circle-outline" size={24} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Mypage"
+        name="MypageTab"
         component={MyPage}
         options={{
           tabBarLabel: 'MyPage',
@@ -57,6 +49,16 @@ const MainTab = () => {
         }}
       />
     </Tab.Navigator>
+  );
+};
+
+const Home = () => {
+  return (
+    <HomeStack.Navigator screenOptions={{headerShown: false}}>
+      <HomeStack.Screen name="Home" component={HomePage} />
+      <HomeStack.Screen name="Add" component={AddPage} />
+      <HomeStack.Screen name="DirectMessage" component={DirectMessagePage} />
+    </HomeStack.Navigator>
   );
 };
 

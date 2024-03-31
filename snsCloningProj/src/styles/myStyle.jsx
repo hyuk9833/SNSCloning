@@ -13,7 +13,7 @@ const myStyle = StyleSheet.create({
     marginHorizontal: 8,
   },
   headerTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   modalView: {},
