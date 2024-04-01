@@ -10,17 +10,12 @@ import {
 import myStyle from '../styles/myStyle';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useEffect, useState} from 'react';
-import {joinUs} from '../apis/auth';
 import {getFeedApi} from '../apis/feed';
 import Config from 'react-native-config';
-import {SliderBox} from 'react-native-image-slider-box';
-import FeedComponent from '../components/FeedComponent';
-
-const baseURL = Config.API_URL;
+import FeedComponent from '../components/FeedDetailComponent';
 
 const HomePage = ({navigation}) => {
   const [feedData, setFeedData] = useState([]);
-  const {width} = useWindowDimensions();
 
   useEffect(() => {
     const getFeedData = async () => {
@@ -32,7 +27,7 @@ const HomePage = ({navigation}) => {
 
   const renderItem = ({item}) => {
     return (
-      <View key={item.id} style={{borderTopWidth: 1, borderTopColor: '#ccc'}}>
+      <View key={item.id} style={{borderTopWidth: 2, borderTopColor: '#ccc'}}>
         <FeedComponent feed={item} />
       </View>
     );

@@ -1,7 +1,16 @@
-import {FlatList, SafeAreaView, Text, View} from 'react-native';
+import {
+  FlatList,
+  SafeAreaView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  useWindowDimensions,
+} from 'react-native';
 import HeaderComponent from '../components/HeaderComponent';
 import MessageBoxComponent from '../components/MessageBoxComponent';
 import myStyle from '../styles/myStyle';
+import {useState} from 'react';
 
 const dummyMessageList = [
   {isOwnData: true, content: '안녕!', time: '3:29', isRead: true},
@@ -26,8 +35,8 @@ const dummyMessageList = [
 ];
 
 const DirectMessageDetailPage = ({route, navigation}) => {
-  console.log(new Date().toLocaleTimeString());
-  const img = 'https://avatar';
+  const [textInputData, setTextInputData] = useState();
+  const {width} = useWindowDimensions();
 
   const renderItem = ({item, index}) => {
     return (
@@ -58,6 +67,40 @@ const DirectMessageDetailPage = ({route, navigation}) => {
         keyExtractor={(item, index) => index}
         style={{flex: 1}}
       />
+      <View style={{justifyContent: 'flex-end', width: width, height: 60}}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            paddingVertical: 8,
+          }}>
+          <TextInput
+            placeholder="채팅을 입력하세요"
+            value={textInputData}
+            onChangeText={text => setTextInputData(text)}
+            style={{
+              flex: 1,
+              borderWidth: 1,
+              borderColor: '#c9c9c9',
+              borderRadius: 16,
+              padding: 8,
+              marginHorizontal: 8,
+            }}
+          />
+          <TouchableOpacity
+            style={{
+              borderRadius: 8,
+              backgroundColor: '#4169e1',
+              paddingHorizontal: 8,
+              height: 36,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{color: '#FFF', fontWeight: 'bold'}}>전송</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };

@@ -6,10 +6,10 @@ ReactNative를 활용한 SNS를 구현하는 것. 오운완 앱을 구현하는�
 
 [x] 피드 리스트
 [x] 피드 검색
-[ ] 피드 업로드
+[x] 피드 업로드
 [ ] 코멘트 리스트/코멘트 작성
-[ ] DM 리스트
-[ ] DM 상세화면
+[x] DM 리스트
+[x] DM 상세화면
 
 - 그 외 선택으로 구현 가능한 기능은 아래와 같다.
   [ ] 로그인/회원가입
@@ -31,3 +31,5 @@ ReactNative를 활용한 SNS를 구현하는 것. 오운완 앱을 구현하는�
 - react-native-camera-roll/camera-roll : 갤러리 접근
 - react-native-config : env 활용
 - react-native-image-slider-box : 이미지 슬라이더
+- apisauce : api 활용
+- react-native-modal : modal 활용

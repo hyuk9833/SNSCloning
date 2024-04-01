@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
+import {SafeAreaView, TouchableOpacity, FlatList} from 'react-native';
 import HeaderComponent from '../components/HeaderComponent';
 import MessageComponent from '../components/MessageComponent';
 import myStyle from '../styles/myStyle';

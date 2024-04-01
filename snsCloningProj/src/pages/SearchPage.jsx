@@ -15,7 +15,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import myStyle from '../styles/myStyle';
 import {useEffect, useState} from 'react';
 import {search} from '../apis/search';
-import FeedDetail from '../components/FeedComponent';
+import FeedDetailComponent from '../components/FeedDetailComponent';
 import {getFeedDetailApi} from '../apis/feed';
 import HeaderComponent from '../components/HeaderComponent';
 
@@ -104,7 +104,7 @@ const SearchPage = () => {
       <Modal visible={isModalVisible} animationType="slide">
         <SafeAreaView style={myStyle.displayWrapper}>
           <HeaderComponent leftHeaderHandler={modalHandler} title={'게시물'} />
-          <FeedDetail feed={feedDetailData} />
+          <FeedDetailComponent feed={feedDetailData} />
         </SafeAreaView>
       </Modal>
     </SafeAreaView>

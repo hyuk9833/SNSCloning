@@ -45,7 +45,6 @@ const myStyle = StyleSheet.create({
     height: 24,
   },
   profileNickname: {
-    fontSize: 14,
     fontWeight: 'bold',
   },
   feedImage: {

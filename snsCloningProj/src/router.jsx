@@ -6,7 +6,6 @@ import Splash from './pages/Splash';
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
 import AddPage from './pages/AddPage';
-import MyPage from './pages/MyPage';
 import DirectMessagePage from './pages/DirectMessagePage';
 import DirectMessageDetailPage from './pages/DirectMessageDetailPage';
 
@@ -36,16 +35,6 @@ const MainTab = () => {
           tabBarLabel: 'Search',
           tabBarIcon: ({color, size}) => (
             <Icon name="magnify" size={24} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="MypageTab"
-        component={MyPage}
-        options={{
-          tabBarLabel: 'MyPage',
-          tabBarIcon: ({color, size}) => (
-            <Icon name="home" size={24} color={color} />
           ),
         }}
       />
