@@ -15,5 +15,4 @@ export const joinUs = async () => {
     nickname: 'ohjeonghyeok',
     phonenNumber: '01014224124',
   });
-  // console.log(res);
 };

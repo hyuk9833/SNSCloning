@@ -11,7 +11,6 @@ import myStyle from '../styles/myStyle';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useEffect, useState} from 'react';
 import {getFeedApi} from '../apis/feed';
-import Config from 'react-native-config';
 import FeedComponent from '../components/FeedDetailComponent';
 
 const HomePage = ({navigation}) => {
@@ -20,6 +19,7 @@ const HomePage = ({navigation}) => {
   useEffect(() => {
     const getFeedData = async () => {
       const data = await getFeedApi();
+      console.log(data);
       setFeedData(data);
     };
     getFeedData();

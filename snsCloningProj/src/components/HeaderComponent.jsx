@@ -14,7 +14,7 @@ const HeaderComponent = ({title, leftHeaderHandler, rightHeaderHandler}) => {
       )}
       <Text style={myStyle.headerTitle}>{title}</Text>
       {rightHeaderHandler ? (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => rightHeaderHandler()}>
           <Text>완료</Text>
         </TouchableOpacity>
       ) : (

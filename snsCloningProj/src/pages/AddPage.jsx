@@ -30,13 +30,9 @@ const AddPage = ({navigation}) => {
     FetchImages();
   }, []);
 
-  useEffect(() => {
-    console.log(selectedPhoto);
-  }, [selectedIndex]);
-
   const feedConfirm = () => {
     const imageList = selectedPhoto.map(item => item.uri);
-    addFeedApi({feedRequest: {content: content, tags: []}, image: imageList});
+    // addFeedApi({feedRequest: {content: content, tags: []}, image: imageList});
     navigation.goBack();
   };
 
@@ -76,7 +72,7 @@ const AddPage = ({navigation}) => {
   };
 
   const modalHandler = () => {
-    setIsModalVisible(false);
+    setModalVisible(false);
   };
 
   const renderItem = ({item, index}) => {
