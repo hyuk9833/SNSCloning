@@ -11,9 +11,11 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import myStyle from '../styles/myStyle';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import {addFeedApi} from '../apis/feed';
+import HeaderComponent from '../components/HeaderComponent';
 
 const AddPage = ({navigation}) => {
   const [content, setContent] = useState('');
@@ -73,6 +75,10 @@ const AddPage = ({navigation}) => {
     });
   };
 
+  const modalHandler = () => {
+    setIsModalVisible(false);
+  };
+
   const renderItem = ({item, index}) => {
     return (
       <TouchableOpacity
@@ -101,7 +107,7 @@ const AddPage = ({navigation}) => {
     <SafeAreaView style={myStyle.displayWrapper}>
       <View style={myStyle.headerWrapper}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <MaterialCommunityIcon name="close" size={24} />
+          <MaterialIcon name="keyboard-arrow-left" size={24} />
         </TouchableOpacity>
         <Text style={myStyle.headerTitle}>게시물 추가</Text>
         <TouchableOpacity onPress={() => feedConfirm()}>
@@ -147,13 +153,10 @@ const AddPage = ({navigation}) => {
           setModalVisible(false);
         }}>
         <SafeAreaView style={myStyle.modalView}>
-          <View style={myStyle.headerWrapper}>
-            <View />
-            <Text style={myStyle.headerTitle}>사진 선택</Text>
-            <TouchableOpacity onPress={() => setModalVisible(false)}>
-              <Text style={{color: '#4169e1'}}>완료</Text>
-            </TouchableOpacity>
-          </View>
+          <HeaderComponent
+            rightHeaderHandler={modalHandler}
+            title="이미지 선택"
+          />
           <FlatList
             data={images}
             renderItem={renderItem}

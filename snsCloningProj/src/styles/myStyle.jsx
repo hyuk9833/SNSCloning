@@ -13,7 +13,7 @@ const myStyle = StyleSheet.create({
     marginHorizontal: 8,
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
   },
   modalView: {},
@@ -40,14 +40,36 @@ const myStyle = StyleSheet.create({
     top: 2,
     zIndex: 2,
   },
+  profileImage: {
+    width: 24,
+    height: 24,
+  },
+  profileNickname: {
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
   feedImage: {
     width: 120,
     height: 120,
+  },
+  emotionCountWrapper: {
+    borderWidth: 2,
+    borderColor: '#6c6c6c',
+    borderRadius: 16,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+  },
+  emotionCountText: {
+    fontWeight: 'bold',
   },
   flexRowWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+  },
+  chatTime: {
+    color: '#8a8a8a',
+    fontWeight: '600',
   },
 });
 

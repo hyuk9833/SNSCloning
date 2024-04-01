@@ -8,6 +8,7 @@ import SearchPage from './pages/SearchPage';
 import AddPage from './pages/AddPage';
 import MyPage from './pages/MyPage';
 import DirectMessagePage from './pages/DirectMessagePage';
+import DirectMessageDetailPage from './pages/DirectMessageDetailPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -58,6 +59,10 @@ const Home = () => {
       <HomeStack.Screen name="Home" component={HomePage} />
       <HomeStack.Screen name="Add" component={AddPage} />
       <HomeStack.Screen name="DirectMessage" component={DirectMessagePage} />
+      <HomeStack.Screen
+        name="DirectMessageDetail"
+        component={DirectMessageDetailPage}
+      />
     </HomeStack.Navigator>
   );
 };

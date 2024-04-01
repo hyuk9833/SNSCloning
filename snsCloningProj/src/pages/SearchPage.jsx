@@ -1,6 +1,7 @@
 import {
   SafeAreaView,
   TextInput,
+  Text,
   View,
   TouchableOpacity,
   FlatList,
@@ -14,14 +15,15 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import myStyle from '../styles/myStyle';
 import {useEffect, useState} from 'react';
 import {search} from '../apis/search';
-import FeedDetail from '../components/FeedDetail';
+import FeedDetail from '../components/FeedComponent';
+import {getFeedDetailApi} from '../apis/feed';
+import HeaderComponent from '../components/HeaderComponent';
 
 const SearchPage = () => {
   const [searchTag, setSearchTag] = useState('');
   const [searchList, setSearchList] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [feedDetailData, setFeedDetailData] = useState('');
-  const [] = useState();
 
   const {width} = useWindowDimensions();
 
@@ -30,9 +32,18 @@ const SearchPage = () => {
     setSearchList(data);
   };
 
+  const feedDetailHandler = async id => {
+    const data = await getFeedDetailApi(id);
+    console.log(data);
+    setFeedDetailData(data);
+    setIsModalVisible(true);
+  };
+
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity
+        style={{borderWidth: 1, borderColor: '#FFF'}}
+        onPress={() => feedDetailHandler(item.id)}>
         <Image
           source={{uri: 'https://picsum.photos/300/300'}}
           style={{width: width / 4 - 2, height: width / 4 - 2}}
@@ -49,6 +60,10 @@ const SearchPage = () => {
         )}
       </TouchableOpacity>
     );
+  };
+
+  const modalHandler = () => {
+    setIsModalVisible(false);
   };
 
   return (
@@ -86,9 +101,12 @@ const SearchPage = () => {
           numColumns={4}
         />
       </View>
-      {/* <Modal>
-        <FeedDetail feed={feedDetailData} />
-      </Modal> */}
+      <Modal visible={isModalVisible} animationType="slide">
+        <SafeAreaView style={myStyle.displayWrapper}>
+          <HeaderComponent leftHeaderHandler={modalHandler} title={'게시물'} />
+          <FeedDetail feed={feedDetailData} />
+        </SafeAreaView>
+      </Modal>
     </SafeAreaView>
   );
 };

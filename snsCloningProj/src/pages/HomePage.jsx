@@ -14,6 +14,7 @@ import {joinUs} from '../apis/auth';
 import {getFeedApi} from '../apis/feed';
 import Config from 'react-native-config';
 import {SliderBox} from 'react-native-image-slider-box';
+import FeedComponent from '../components/FeedComponent';
 
 const baseURL = Config.API_URL;
 
@@ -30,40 +31,9 @@ const HomePage = ({navigation}) => {
   }, []);
 
   const renderItem = ({item}) => {
-    item.images = item.images.map(data => 'https://picsum.photos/1000/1000');
     return (
       <View key={item.id} style={{borderTopWidth: 1, borderTopColor: '#ccc'}}>
-        <View style={myStyle.headerWrapper}>
-          <View style={myStyle.flexRowWrapper}>
-            <Image
-              source={{uri: 'https://avatar.iran.liara.run/public'}}
-              style={{width: 24, height: 24}}
-            />
-            <Text>{item.nickname}</Text>
-            <Text style={{fontSize: 13, color: '#5c5c5c'}}>
-              {item.id}시간 전
-            </Text>
-          </View>
-          <TouchableOpacity>
-            <MaterialCommunityIcon name="dots-horizontal" size={24} />
-          </TouchableOpacity>
-        </View>
-        <SliderBox
-          images={item.images}
-          dotColor="#FFF"
-          inactiveDotColor="#CCC"
-          sliderBoxHeight={width}
-        />
-        <View style={{padding: 16, gap: 8}}>
-          <Text>{item.content}</Text>
-          <View style={myStyle.flexRowWrapper}>
-            {item.tags.map((data, index) => (
-              <TouchableOpacity key={index}>
-                <Text style={{fontSize: 13, color: '#4169e1'}}>{data}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
+        <FeedComponent feed={item} />
       </View>
     );
   };
@@ -81,7 +51,8 @@ const HomePage = ({navigation}) => {
               color="#000"
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log(feedData)}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('DirectMessage')}>
             <MaterialCommunityIcon
               name="message-outline"
               size={28}
