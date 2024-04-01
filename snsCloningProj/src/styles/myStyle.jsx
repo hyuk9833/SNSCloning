@@ -40,6 +40,15 @@ const myStyle = StyleSheet.create({
     top: 2,
     zIndex: 2,
   },
+  feedImage: {
+    width: 120,
+    height: 120,
+  },
+  flexRowWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
 });
 
 export default myStyle;

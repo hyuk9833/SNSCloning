@@ -8,5 +8,3 @@ export const api = create({
   baseURL: baseURL,
   withCredentials: true,
 });
-
-console.log(api.axiosInstance.defaults.headers.common["X-Custom-Prop"]);

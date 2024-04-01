@@ -5,7 +5,7 @@ export const login = async () => {
     email: 'wjdgur0224@gmail.com',
     password: 'Qwer1234@',
   });
-  console.log(res);
+  console.log(res.data);
 };
 
 export const joinUs = async () => {

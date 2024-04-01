@@ -13,8 +13,12 @@ const Splash = ({navigation}) => {
     }, 2000);
   }, []);
   return (
-    <SafeAreaView style={myStyle.displayWrapper}>
-      <Image source={logoIcon} />
+    <SafeAreaView
+      style={[
+        myStyle.displayWrapper,
+        {justifyContent: 'center', alignItems: 'center'},
+      ]}>
+      <Image source={logoIcon} style={{width: 100, height: 100}} />
     </SafeAreaView>
   );
 };

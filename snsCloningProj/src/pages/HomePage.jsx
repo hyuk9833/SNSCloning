@@ -8,35 +8,62 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import myStyle from '../styles/myStyle';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useEffect, useState} from 'react';
 import {joinUs} from '../apis/auth';
 import {getFeedApi} from '../apis/feed';
+import Config from 'react-native-config';
+import {SliderBox} from 'react-native-image-slider-box';
+
+const baseURL = Config.API_URL;
 
 const HomePage = ({navigation}) => {
-  const [feedData, setFeedData] = useState();
+  const [feedData, setFeedData] = useState([]);
   const {width} = useWindowDimensions();
 
   useEffect(() => {
     const getFeedData = async () => {
       const data = await getFeedApi();
-      setFeedData([data]);
+      setFeedData(data);
     };
     getFeedData();
   }, []);
 
-  const renderItem = ({item, index}) => {
-    console.log(index);
+  const renderItem = ({item}) => {
+    item.images = item.images.map(data => 'https://picsum.photos/1000/1000');
     return (
-      <View style={{width: width, height: width}} key={(item, index) => index}>
-        <Text>{item.content}</Text>
-        {/* <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text>{item}</Text>
-          <Image
-            source={{uri: 'https://avatar.iran.liara.run/public'}}
-            style={myStyle.profileImg}
-          />
-        </View> */}
+      <View key={item.id} style={{borderTopWidth: 1, borderTopColor: '#ccc'}}>
+        <View style={myStyle.headerWrapper}>
+          <View style={myStyle.flexRowWrapper}>
+            <Image
+              source={{uri: 'https://avatar.iran.liara.run/public'}}
+              style={{width: 24, height: 24}}
+            />
+            <Text>{item.nickname}</Text>
+            <Text style={{fontSize: 13, color: '#5c5c5c'}}>
+              {item.id}시간 전
+            </Text>
+          </View>
+          <TouchableOpacity>
+            <MaterialCommunityIcon name="dots-horizontal" size={24} />
+          </TouchableOpacity>
+        </View>
+        <SliderBox
+          images={item.images}
+          dotColor="#FFF"
+          inactiveDotColor="#CCC"
+          sliderBoxHeight={width}
+        />
+        <View style={{padding: 16, gap: 8}}>
+          <Text>{item.content}</Text>
+          <View style={myStyle.flexRowWrapper}>
+            {item.tags.map((data, index) => (
+              <TouchableOpacity key={index}>
+                <Text style={{fontSize: 13, color: '#4169e1'}}>{data}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
       </View>
     );
   };
@@ -48,17 +75,25 @@ const HomePage = ({navigation}) => {
         <Text style={myStyle.headerTitle}>피드</Text>
         <View style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
           <TouchableOpacity onPress={() => navigation.navigate('Add')}>
-            <Icon name="plus-circle-outline" size={28} color="#000" />
+            <MaterialCommunityIcon
+              name="plus-circle-outline"
+              size={28}
+              color="#000"
+            />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => joinUs()}>
-            <Icon name="message-outline" size={28} color="#000" />
+          <TouchableOpacity onPress={() => console.log(feedData)}>
+            <MaterialCommunityIcon
+              name="message-outline"
+              size={28}
+              color="#000"
+            />
           </TouchableOpacity>
         </View>
       </View>
       <FlatList
         data={feedData}
-        renerItem={renderItem}
-        keyExtractor={(item, index) => index}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
         removeClippedSubviews
       />
     </SafeAreaView>

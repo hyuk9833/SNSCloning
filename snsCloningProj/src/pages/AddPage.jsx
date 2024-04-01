@@ -10,10 +10,9 @@ import {
   View,
   useWindowDimensions,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import myStyle from '../styles/myStyle';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
-import api from '../apis/api';
 import {addFeedApi} from '../apis/feed';
 
 const AddPage = ({navigation}) => {
@@ -29,8 +28,13 @@ const AddPage = ({navigation}) => {
     FetchImages();
   }, []);
 
+  useEffect(() => {
+    console.log(selectedPhoto);
+  }, [selectedIndex]);
+
   const feedConfirm = () => {
-    addFeedApi({feedRequest: {content: content, tags: ''}, image: images});
+    const imageList = selectedPhoto.map(item => item.uri);
+    addFeedApi({feedRequest: {content: content, tags: []}, image: imageList});
     navigation.goBack();
   };
 
@@ -96,8 +100,8 @@ const AddPage = ({navigation}) => {
   return (
     <SafeAreaView style={myStyle.displayWrapper}>
       <View style={myStyle.headerWrapper}>
-        <TouchableOpacity>
-          <Icon name="close" size={24} />
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <MaterialCommunityIcon name="close" size={24} />
         </TouchableOpacity>
         <Text style={myStyle.headerTitle}>게시물 추가</Text>
         <TouchableOpacity onPress={() => feedConfirm()}>
@@ -108,7 +112,7 @@ const AddPage = ({navigation}) => {
         <TextInput
           multiline
           value={content}
-          onChange={text => setContent(text)}
+          onChangeText={text => setContent(text)}
           placeholder="문구를 입력하세요"
           style={{
             width: width - 32,
@@ -133,7 +137,7 @@ const AddPage = ({navigation}) => {
             borderColor: '#CCC',
           }}
           onPress={() => setModalVisible(true)}>
-          <Icon name="plus" size={36} color="#CCC" />
+          <MaterialCommunityIcon name="plus" size={36} color="#CCC" />
         </TouchableOpacity>
       </View>
       <Modal
